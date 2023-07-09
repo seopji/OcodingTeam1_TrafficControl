@@ -26,7 +26,9 @@ void setup() {
   pinMode(tl2,INPUT);
   pinMode(sl1,OUTPUT);
   pinMode(sl2,INPUT);
-
+  digitalWrite(trl1,0);
+  digitalWrite(trl2,0);
+  digitalWrite(trl3,1);
 }
 
 // 33~57의 초음파 센서에서의 음파 입출력을 통한 거리값 얻는 코드는 제가 작성한 코드가 아님. 
@@ -58,21 +60,20 @@ void loop() {
 
 
    if(dis1 <= 50){
-    mser.write("tl1");
-    digitalWrite(trl1,0);
+    mser.write("tl1"); // 빨간불입니다
+    digitalWrite(trl3,0);
     for(int i=1;i<=3;i+=1){
       digitalWrite(trl2,1);
       delay(1000);
       digitalWrite(trl2,0);
     }
-    digitalWrite(trl3,1);
-    delay(5000); //5초 빨간불
-    digitalWrite(trl3,0);
     digitalWrite(trl1,1);
-    mser.write("tl0");
+    delay(5000); //5초 빨간불
+    digitalWrite(trl1,0);
+    digitalWrite(trl3,1);
+    mser.write("tl0"); //빨간불 아닙니다
    }
    if(dis2 <= 50){         
      mser.write("dis2");
    }
-   digitalWrite(trl1,1);
 }
