@@ -12,6 +12,7 @@
   int trl1=1; //신호등 빨강
   int trl2=2; //신호등 노랑
   int trl3=3; //신호등 초록
+  int pR = 0; //신호등의 빨간불을 겪은 횟수
   int rsp=200; //basic speed
   int lsp=240;
 void setup() {
@@ -59,7 +60,7 @@ void loop() {
    }
 
 
-   if(dis1 <= 50){
+   if(dis1 <= 50 && pR ==0){
     mser.write("tl1"); // 빨간불입니다
     digitalWrite(trl3,0);
     for(int i=1;i<=3;i+=1){
@@ -72,8 +73,10 @@ void loop() {
     digitalWrite(trl1,0);
     digitalWrite(trl3,1);
     mser.write("tl0"); //빨간불 아닙니다
+    pR = 1;
    }
-   if(dis2 <= 50){         
+   
+  if(dis2 <= 50){         
      mser.write("dis2");
    }
 }
